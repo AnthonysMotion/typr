@@ -59,25 +59,25 @@ export default function TypingArea({ text, typedText, isFinished }: TypingAreaPr
   return (
     <div className="w-full max-w-5xl group relative">
       <div className="glass-morphism rounded-[3rem] p-1 shadow-2xl transition-transform duration-500 hover:scale-[1.01]">
-        <div className="bg-white/40 rounded-[2.8rem] p-10 md:p-14">
+        <div className="bg-white/40 rounded-[2.8rem] p-10 md:p-14 relative">
           <div
             ref={containerRef}
-            className={`relative max-h-64 overflow-y-auto font-sans text-3xl leading-[1.6] tracking-tight md:text-4xl ${
+            className={`relative max-h-64 overflow-y-auto font-sans text-3xl leading-[1.6] tracking-tight md:text-4xl transition-all duration-300 ${
               isFinished ? "opacity-30 grayscale" : ""
-            } hide-scrollbar`}
+            } ${!isFinished && typedText.length === 0 ? "blur-[1px]" : ""} hide-scrollbar`}
             style={{ scrollBehavior: "smooth" }}
           >
             <div className="whitespace-pre-wrap break-words">
               {renderCharacters()}
             </div>
-            {!isFinished && typedText.length === 0 && (
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="bg-blue-50/50 backdrop-blur-md px-8 py-3 rounded-full border border-blue-100 shadow-sm">
-                  <p className="text-sm uppercase tracking-[0.2em] text-blue-500">Focus to Begin</p>
-                </div>
-              </div>
-            )}
           </div>
+          {!isFinished && typedText.length === 0 && (
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div className="bg-blue-50/50 backdrop-blur-md px-8 py-3 rounded-full border border-blue-100 shadow-sm pointer-events-auto">
+                <p className="text-sm uppercase tracking-[0.2em] text-blue-500">Focus to Begin</p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
       

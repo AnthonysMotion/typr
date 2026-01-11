@@ -1,7 +1,5 @@
 "use client";
 
-import { Activity, Target, Zap, Hash } from "lucide-react";
-
 interface StatsBarProps {
   wpm: number;
   accuracy: number;
@@ -20,10 +18,10 @@ export default function StatsBar({
   isFinished,
 }: StatsBarProps) {
   const statItems = [
-    { label: "WPM", value: wpm, icon: Activity, color: "text-blue-600", bg: "bg-blue-50" },
-    { label: "Accuracy", value: `${accuracy.toFixed(0)}%`, icon: Target, color: "text-emerald-600", bg: "bg-emerald-50" },
-    { label: "Raw", value: rawSpeed, icon: Zap, color: "text-purple-600", bg: "bg-purple-50" },
-    { label: "Chars", value: `${correctChars}/${incorrectChars}`, icon: Hash, color: "text-slate-600", bg: "bg-slate-50" },
+    { label: "WPM", value: wpm, color: "text-blue-600" },
+    { label: "Accuracy", value: `${accuracy.toFixed(0)}%`, color: "text-emerald-600" },
+    { label: "Raw", value: rawSpeed, color: "text-purple-600" },
+    { label: "Chars", value: `${correctChars}/${incorrectChars}`, color: "text-slate-600" },
   ];
 
   return (
@@ -31,17 +29,14 @@ export default function StatsBar({
       {statItems.map((stat) => (
         <div 
           key={stat.label}
-          className={`glass-morphism group flex flex-col items-center justify-center p-6 transition-all duration-300 rounded-[2.5rem] ${
+          className={`glass-morphism flex flex-col justify-center p-6 transition-all duration-300 rounded-[2.5rem] ${
             isFinished ? "scale-105 shadow-xl ring-2 ring-white/60" : ""
           }`}
         >
-          <div className={`mb-3 rounded-2xl p-2.5 ${stat.bg} ${stat.color} shadow-sm transition-transform group-hover:rotate-12`}>
-            <stat.icon className="h-5 w-5" />
-          </div>
-          <div className="text-[10px] uppercase tracking-widest text-slate-400 mb-1">
+          <div className="text-[10px] uppercase tracking-widest text-slate-400 mb-2">
             {stat.label}
           </div>
-          <div className={`text-3xl tracking-tight ${stat.color}`}>
+          <div className={`text-4xl tracking-tight ${stat.color}`}>
             {stat.value}
           </div>
         </div>

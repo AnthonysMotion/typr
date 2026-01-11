@@ -135,12 +135,6 @@ export default function Home() {
             <h1 className="text-4xl tracking-tighter text-slate-900 md:text-5xl">
               typr<span className="text-blue-500">.</span>
             </h1>
-            <div className="flex items-center gap-2 mt-1">
-              <span className="h-1.5 w-1.5 rounded-full bg-blue-500 animate-pulse" />
-              <span className="text-[10px] uppercase tracking-[0.3em] text-slate-400">
-                Precision Engine v2
-              </span>
-            </div>
           </div>
           
           <HighScore refreshTrigger={highScoreRefresh} />
@@ -187,12 +181,6 @@ export default function Home() {
         {/* Actions */}
         <div className="flex flex-col items-center gap-10">
           <RestartButton onRestart={initGame} />
-          
-          <div className="flex items-center gap-8 opacity-40">
-            <span className="text-[10px] tracking-[0.5em] text-slate-300">
-              OPTIMIZED FOR HUMAN INPUT
-            </span>
-          </div>
         </div>
       </div>
     </main>
