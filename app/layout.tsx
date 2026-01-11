@@ -1,7 +1,4 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Inter } from "next/font/google";
-import "./globals.css";
-
 import { JetBrains_Mono, Inter, VT323 } from "next/font/google";
 import "./globals.css";
 
