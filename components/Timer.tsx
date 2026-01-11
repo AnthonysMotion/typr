@@ -1,5 +1,8 @@
 "use client";
 
+import { Progress } from "@/components/ui/progress";
+import { Button } from "@/components/ui/button";
+
 interface TimerProps {
   timeLeft: number;
   duration: number;
@@ -16,42 +19,35 @@ export default function Timer({
   isFinished,
 }: TimerProps) {
   const durations = [15, 30, 60, 120];
-  const progress = (timeLeft / duration) * 100;
+  const progressValue = (timeLeft / duration) * 100;
 
   return (
-    <div className="flex flex-col items-center gap-3">
-      <div className="flex items-center gap-2">
+    <div className="flex flex-col items-center gap-6 w-full max-w-md">
+      <div className="flex items-center gap-2 rounded-full bg-[#121212] p-1 border border-white/5 shadow-lg">
         {durations.map((d) => (
-          <button
+          <Button
             key={d}
             onClick={() => onDurationChange(d)}
             disabled={isActive || isFinished}
-            className={`rounded-md px-3 py-1 text-sm font-medium transition-all ${
-              duration === d
-                ? "bg-amber-500 text-zinc-900"
-                : "bg-zinc-800 text-zinc-400 hover:bg-zinc-700 hover:text-zinc-200"
-            } ${(isActive || isFinished) ? "cursor-not-allowed opacity-50" : ""}`}
+            variant={duration === d ? "pill" : "ghost"}
+            size="sm"
+            className={`pixel-text text-[10px] ${
+              duration === d ? "bg-zinc-800 text-zinc-100" : "text-zinc-500"
+            }`}
           >
             {d}s
-          </button>
+          </Button>
         ))}
       </div>
       
-      <div className="relative h-2 w-48 overflow-hidden rounded-full bg-zinc-800">
-        <div
-          className={`absolute left-0 top-0 h-full transition-all duration-1000 ease-linear ${
-            timeLeft <= 10 ? "bg-red-500" : "bg-amber-500"
-          }`}
-          style={{ width: `${progress}%` }}
-        />
-      </div>
-      
-      <div
-        className={`font-mono text-4xl font-bold ${
-          timeLeft <= 10 ? "text-red-400" : "text-amber-400"
-        }`}
-      >
-        {timeLeft}
+      <div className="w-full space-y-2">
+        <div className="flex items-center justify-between px-1">
+          <span className="pixel-text text-[10px] text-zinc-600 tracking-widest">Process Active</span>
+          <span className={`pixel-text text-sm font-bold ${timeLeft <= 5 ? "text-red-500 animate-pulse" : "text-zinc-400"}`}>
+            {timeLeft}s
+          </span>
+        </div>
+        <Progress value={progressValue} className="h-1.5" />
       </div>
     </div>
   );
