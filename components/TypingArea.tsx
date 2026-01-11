@@ -70,7 +70,7 @@ export default function TypingArea({ text, typedText, isFinished }: TypingAreaPr
         {renderCharacters()}
       </div>
       {!isFinished && typedText.length === 0 && (
-        <div className="absolute inset-0 flex items-center justify-center bg-zinc-900/80 backdrop-blur-sm">
+        <div className="absolute inset-0 flex items-center justify-center bg-zinc-900/90">
           <p className="text-zinc-400 text-lg">Start typing to begin...</p>
         </div>
       )}
