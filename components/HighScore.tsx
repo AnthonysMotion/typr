@@ -25,9 +25,9 @@ export default function HighScore({ refreshTrigger }: HighScoreProps) {
         <Trophy className="h-4 w-4 text-amber-500" />
       </div>
       <div className="flex items-baseline gap-1.5">
-        <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">Best</span>
-        <span className="text-xl font-bold text-slate-800">{highScore.wpm}</span>
-        <span className="text-xs font-medium text-slate-400">WPM</span>
+        <span className="text-xs uppercase tracking-wider text-slate-400">Best</span>
+        <span className="text-xl text-slate-800">{highScore.wpm}</span>
+        <span className="text-xs text-slate-400">WPM</span>
       </div>
     </div>
   );

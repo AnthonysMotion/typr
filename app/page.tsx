@@ -132,12 +132,12 @@ export default function Home() {
         {/* Header Section */}
         <div className="flex w-full items-center justify-between">
           <div className="flex flex-col">
-            <h1 className="text-4xl font-black tracking-tighter text-slate-900 md:text-5xl">
+            <h1 className="text-4xl tracking-tighter text-slate-900 md:text-5xl">
               typr<span className="text-blue-500">.</span>
             </h1>
             <div className="flex items-center gap-2 mt-1">
               <span className="h-1.5 w-1.5 rounded-full bg-blue-500 animate-pulse" />
-              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400">
+              <span className="text-[10px] uppercase tracking-[0.3em] text-slate-400">
                 Precision Engine v2
               </span>
             </div>
@@ -177,7 +177,7 @@ export default function Home() {
         <div className="h-16">
           {newHighScore && (
             <div className="glass-pill px-10 py-4 bg-emerald-500/10 border-emerald-500/30">
-              <span className="text-sm font-black uppercase tracking-[0.2em] text-emerald-600">
+              <span className="text-sm uppercase tracking-[0.2em] text-emerald-600">
                 Performance Record Updated
               </span>
             </div>
@@ -189,7 +189,7 @@ export default function Home() {
           <RestartButton onRestart={initGame} />
           
           <div className="flex items-center gap-8 opacity-40">
-            <span className="text-[10px] font-bold tracking-[0.5em] text-slate-300">
+            <span className="text-[10px] tracking-[0.5em] text-slate-300">
               OPTIMIZED FOR HUMAN INPUT
             </span>
           </div>

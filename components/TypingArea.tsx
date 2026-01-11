@@ -35,7 +35,7 @@ export default function TypingArea({ text, typedText, isFinished }: TypingAreaPr
 
       if (index < typedChars.length) {
         if (typedChars[index] === char) {
-          className = "text-slate-900 font-medium";
+          className = "text-slate-900";
         } else {
           className = "text-red-400 bg-red-50 rounded-[4px]";
         }
@@ -73,7 +73,7 @@ export default function TypingArea({ text, typedText, isFinished }: TypingAreaPr
             {!isFinished && typedText.length === 0 && (
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="bg-blue-50/50 backdrop-blur-md px-8 py-3 rounded-full border border-blue-100 shadow-sm">
-                  <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-500">Focus to Begin</p>
+                  <p className="text-sm uppercase tracking-[0.2em] text-blue-500">Focus to Begin</p>
                 </div>
               </div>
             )}

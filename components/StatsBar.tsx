@@ -38,10 +38,10 @@ export default function StatsBar({
           <div className={`mb-3 rounded-2xl p-2.5 ${stat.bg} ${stat.color} shadow-sm transition-transform group-hover:rotate-12`}>
             <stat.icon className="h-5 w-5" />
           </div>
-          <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1">
+          <div className="text-[10px] uppercase tracking-widest text-slate-400 mb-1">
             {stat.label}
           </div>
-          <div className={`text-3xl font-black tracking-tight ${stat.color}`}>
+          <div className={`text-3xl tracking-tight ${stat.color}`}>
             {stat.value}
           </div>
         </div>

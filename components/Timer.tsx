@@ -44,8 +44,8 @@ export default function Timer({
       
       <div className="w-full space-y-3">
         <div className="flex items-end justify-between px-2">
-          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-300">Remaining</span>
-          <span className={`text-3xl font-bold tabular-nums ${timeLeft <= 5 ? "text-red-500 animate-pulse" : "text-slate-800"}`}>
+          <span className="text-[10px] uppercase tracking-[0.2em] text-slate-300">Remaining</span>
+          <span className={`text-3xl tabular-nums ${timeLeft <= 5 ? "text-red-500 animate-pulse" : "text-slate-800"}`}>
             {timeLeft}s
           </span>
         </div>
