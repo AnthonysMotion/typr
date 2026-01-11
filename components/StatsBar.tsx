@@ -20,26 +20,28 @@ export default function StatsBar({
   isFinished,
 }: StatsBarProps) {
   const statItems = [
-    { label: "WPM", value: wpm, icon: Activity, color: "text-zinc-100" },
-    { label: "Accuracy", value: `${accuracy.toFixed(0)}%`, icon: Target, color: accuracy >= 95 ? "text-emerald-500" : "text-amber-500" },
-    { label: "Raw", value: rawSpeed, icon: Zap, color: "text-zinc-500" },
-    { label: "Chars", value: `${correctChars}/${incorrectChars}`, icon: Hash, color: "text-zinc-500" },
+    { label: "WPM", value: wpm, icon: Activity, color: "text-blue-600", bg: "bg-blue-50" },
+    { label: "Accuracy", value: `${accuracy.toFixed(0)}%`, icon: Target, color: "text-emerald-600", bg: "bg-emerald-50" },
+    { label: "Raw", value: rawSpeed, icon: Zap, color: "text-purple-600", bg: "bg-purple-50" },
+    { label: "Chars", value: `${correctChars}/${incorrectChars}`, icon: Hash, color: "text-slate-600", bg: "bg-slate-50" },
   ];
 
   return (
-    <div className="grid grid-cols-2 gap-4 w-full md:grid-cols-4">
+    <div className="grid grid-cols-2 gap-5 w-full md:grid-cols-4">
       {statItems.map((stat) => (
         <div 
           key={stat.label}
-          className={`inset-box group flex flex-col items-center justify-center p-4 transition-all duration-300 ${
-            isFinished ? "ring-1 ring-amber-500/20 bg-[#151515]" : ""
+          className={`glass-morphism group flex flex-col items-center justify-center p-6 transition-all duration-300 rounded-[2.5rem] ${
+            isFinished ? "scale-105 shadow-xl ring-2 ring-white/60" : ""
           }`}
         >
-          <div className="flex items-center gap-1.5 mb-1 opacity-40 group-hover:opacity-100 transition-opacity">
-            <stat.icon className="h-3 w-3" />
-            <span className="pixel-text text-[10px] tracking-tighter">{stat.label}</span>
+          <div className={`mb-3 rounded-2xl p-2.5 ${stat.bg} ${stat.color} shadow-sm transition-transform group-hover:rotate-12`}>
+            <stat.icon className="h-5 w-5" />
           </div>
-          <div className={`pixel-text text-xl font-bold tracking-tighter ${stat.color}`}>
+          <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1">
+            {stat.label}
+          </div>
+          <div className={`text-3xl font-black tracking-tight ${stat.color}`}>
             {stat.value}
           </div>
         </div>

@@ -8,7 +8,6 @@ import RestartButton from "@/components/RestartButton";
 import HighScore from "@/components/HighScore";
 import { generateText } from "@/utils/words";
 import { saveHighScore } from "@/utils/localStorage";
-import { Terminal } from "lucide-react";
 
 type GameState = "idle" | "running" | "finished";
 
@@ -31,11 +30,8 @@ export default function Home() {
     let incorrectChars = 0;
 
     typedChars.forEach((char, index) => {
-      if (char === targetChars[index]) {
-        correctChars++;
-      } else {
-        incorrectChars++;
-      }
+      if (char === targetChars[index]) correctChars++;
+      else incorrectChars++;
     });
 
     const totalTyped = typedChars.length;
@@ -102,25 +98,12 @@ export default function Home() {
       if (gameState === "idle" && e.key.length === 1) startGame();
       if (e.key === "Backspace") {
         e.preventDefault();
-        setTypedText((prev) => {
-          if (prev.length === 0) return prev;
-          const targetChars = text.split("");
-          let lastCorrectIndex = -1;
-          for (let i = 0; i < prev.length; i++) {
-            if (prev[i] === targetChars[i]) lastCorrectIndex = i;
-            else break;
-          }
-          const charToDelete = prev.length - 1;
-          return prev.slice(0, -1);
-        });
+        setTypedText((prev) => prev.slice(0, -1));
         return;
       }
       if (e.key.length === 1) {
         e.preventDefault();
-        setTypedText((prev) => {
-          if (prev.length >= text.length) return prev;
-          return prev + e.key;
-        });
+        setTypedText((prev) => (prev.length >= text.length ? prev : prev + e.key));
       }
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -138,29 +121,32 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen p-4 md:p-8">
-      <div className="mx-auto flex max-w-4xl flex-col items-center justify-center gap-12 pt-12">
+    <main className="min-h-screen relative overflow-hidden px-6 py-12">
+      {/* Background blobs matching image styles */}
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-200/30 blur-[120px] rounded-full animate-float" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-200/30 blur-[120px] rounded-full" />
+      <div className="absolute top-[20%] right-[10%] w-[20%] h-[20%] bg-orange-100/30 blur-[100px] rounded-full" />
+
+      <div className="relative mx-auto flex max-w-6xl flex-col items-center justify-center gap-16">
         
         {/* Header Section */}
-        <div className="flex w-full flex-col items-center justify-between gap-8 md:flex-row md:items-start">
-          <div className="flex flex-col gap-2">
-            <div className="flex items-center gap-2">
-              <div className="rounded bg-zinc-100 p-1">
-                <Terminal className="h-5 w-5 text-zinc-950" />
-              </div>
-              <h1 className="pixel-text text-3xl font-bold tracking-widest text-zinc-100">
-                typr_v1.0
-              </h1>
+        <div className="flex w-full items-center justify-between">
+          <div className="flex flex-col">
+            <h1 className="text-4xl font-black tracking-tighter text-slate-900 md:text-5xl">
+              typr<span className="text-blue-500">.</span>
+            </h1>
+            <div className="flex items-center gap-2 mt-1">
+              <span className="h-1.5 w-1.5 rounded-full bg-blue-500 animate-pulse" />
+              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400">
+                Precision Engine v2
+              </span>
             </div>
-            <p className="pixel-text text-[10px] text-zinc-600 tracking-tight">
-              NEURAL INTERFACE: ACTIVE // SECURE_CHANNEL: ESTABLISHED
-            </p>
           </div>
           
           <HighScore refreshTrigger={highScoreRefresh} />
         </div>
 
-        {/* Timer & Controls */}
+        {/* Timer & Setup */}
         <Timer
           timeLeft={timeLeft}
           duration={duration}
@@ -169,8 +155,8 @@ export default function Home() {
           isFinished={gameState === "finished"}
         />
 
-        {/* Main Typing Engine */}
-        <div className="w-full space-y-8 animate-fade-in">
+        {/* Main Interface */}
+        <div className="w-full space-y-12 animate-fade-in">
           <TypingArea
             text={text}
             typedText={typedText}
@@ -187,24 +173,25 @@ export default function Home() {
           />
         </div>
 
-        {/* Global Notifications */}
-        <div className="h-12">
+        {/* Success Banner */}
+        <div className="h-16">
           {newHighScore && (
-            <div className="pixel-text flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-6 py-2 text-xs text-amber-500 animate-bounce">
-              <span className="h-2 w-2 rounded-full bg-amber-500 animate-pulse" />
-              CRITICAL: NEW PERFORMANCE PEAK DETECTED
+            <div className="glass-pill px-10 py-4 bg-emerald-500/10 border-emerald-500/30">
+              <span className="text-sm font-black uppercase tracking-[0.2em] text-emerald-600">
+                Performance Record Updated
+              </span>
             </div>
           )}
         </div>
 
-        {/* Footer Actions */}
-        <div className="flex flex-col items-center gap-6">
+        {/* Actions */}
+        <div className="flex flex-col items-center gap-10">
           <RestartButton onRestart={initGame} />
           
-          <div className="flex items-center gap-4 opacity-20">
-            <div className="h-px w-12 bg-zinc-700" />
-            <span className="pixel-text text-[8px] tracking-[0.4em] text-zinc-500">SYSTEM_ID: ANTH-01</span>
-            <div className="h-px w-12 bg-zinc-700" />
+          <div className="flex items-center gap-8 opacity-40">
+            <span className="text-[10px] font-bold tracking-[0.5em] text-slate-300">
+              OPTIMIZED FOR HUMAN INPUT
+            </span>
           </div>
         </div>
       </div>

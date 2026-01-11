@@ -22,17 +22,19 @@ export default function Timer({
   const progressValue = (timeLeft / duration) * 100;
 
   return (
-    <div className="flex flex-col items-center gap-6 w-full max-w-md">
-      <div className="flex items-center gap-2 rounded-full bg-[#121212] p-1 border border-white/5 shadow-lg">
+    <div className="flex flex-col items-center gap-8 w-full max-w-lg">
+      <div className="glass-morphism rounded-full p-1.5 flex gap-1">
         {durations.map((d) => (
           <Button
             key={d}
             onClick={() => onDurationChange(d)}
             disabled={isActive || isFinished}
-            variant={duration === d ? "pill" : "ghost"}
+            variant="ghost"
             size="sm"
-            className={`pixel-text text-[10px] ${
-              duration === d ? "bg-zinc-800 text-zinc-100" : "text-zinc-500"
+            className={`rounded-full px-6 transition-all duration-300 ${
+              duration === d 
+                ? "bg-white/80 text-blue-600 shadow-sm" 
+                : "text-slate-400 hover:text-slate-600"
             }`}
           >
             {d}s
@@ -40,14 +42,19 @@ export default function Timer({
         ))}
       </div>
       
-      <div className="w-full space-y-2">
-        <div className="flex items-center justify-between px-1">
-          <span className="pixel-text text-[10px] text-zinc-600 tracking-widest">Process Active</span>
-          <span className={`pixel-text text-sm font-bold ${timeLeft <= 5 ? "text-red-500 animate-pulse" : "text-zinc-400"}`}>
+      <div className="w-full space-y-3">
+        <div className="flex items-end justify-between px-2">
+          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-300">Remaining</span>
+          <span className={`text-3xl font-bold tabular-nums ${timeLeft <= 5 ? "text-red-500 animate-pulse" : "text-slate-800"}`}>
             {timeLeft}s
           </span>
         </div>
-        <Progress value={progressValue} className="h-1.5" />
+        <div className="glass-inset rounded-full h-3 p-1 flex items-center">
+          <div 
+            className="h-full bg-gradient-to-r from-blue-400 to-cyan-300 rounded-full transition-all duration-1000 ease-linear shadow-[0_0_10px_rgba(59,130,246,0.3)]"
+            style={{ width: `${progressValue}%` }}
+          />
+        </div>
       </div>
     </div>
   );

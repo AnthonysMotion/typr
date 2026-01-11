@@ -30,25 +30,25 @@ export default function TypingArea({ text, typedText, isFinished }: TypingAreaPr
     const typedChars = typedText.split("");
 
     return chars.map((char, index) => {
-      let className = "text-zinc-700";
+      let className = "text-slate-300";
       let isCursor = false;
 
       if (index < typedChars.length) {
         if (typedChars[index] === char) {
-          className = "text-zinc-200";
+          className = "text-slate-900 font-medium";
         } else {
-          className = "text-red-500 bg-red-500/10";
+          className = "text-red-400 bg-red-50 rounded-[4px]";
         }
       } else if (index === typedChars.length) {
         isCursor = true;
-        className = "text-zinc-100 border-b-2 border-white animate-pulse";
+        className = "text-blue-600 relative after:absolute after:bottom-0 after:left-0 after:h-1 after:w-full after:bg-blue-600 after:rounded-full after:animate-pulse";
       }
 
       return (
         <span
           key={index}
           ref={isCursor ? cursorRef : null}
-          className={`${className} transition-all duration-100`}
+          className={`${className} transition-all duration-150`}
         >
           {char}
         </span>
@@ -57,27 +57,33 @@ export default function TypingArea({ text, typedText, isFinished }: TypingAreaPr
   };
 
   return (
-    <div className="skeuo-card w-full max-w-4xl p-1">
-      <div className="rounded-2xl bg-[#0d0d0d] p-8">
-        <div
-          ref={containerRef}
-          className={`relative max-h-56 overflow-y-auto font-mono text-2xl leading-[1.6] tracking-wide md:text-3xl ${
-            isFinished ? "opacity-30" : ""
-          } hide-scrollbar`}
-          style={{ scrollBehavior: "smooth" }}
-        >
-          <div className="whitespace-pre-wrap break-words">
-            {renderCharacters()}
-          </div>
-          {!isFinished && typedText.length === 0 && (
-            <div className="absolute inset-0 flex items-center justify-center bg-[#0d0d0d]/40 backdrop-blur-[2px]">
-              <div className="inset-box px-6 py-2">
-                <p className="pixel-text text-xs text-zinc-500">Awaiting Input...</p>
-              </div>
+    <div className="w-full max-w-5xl group relative">
+      <div className="glass-morphism rounded-[3rem] p-1 shadow-2xl transition-transform duration-500 hover:scale-[1.01]">
+        <div className="bg-white/40 rounded-[2.8rem] p-10 md:p-14">
+          <div
+            ref={containerRef}
+            className={`relative max-h-64 overflow-y-auto font-sans text-3xl leading-[1.6] tracking-tight md:text-4xl ${
+              isFinished ? "opacity-30 grayscale" : ""
+            } hide-scrollbar`}
+            style={{ scrollBehavior: "smooth" }}
+          >
+            <div className="whitespace-pre-wrap break-words">
+              {renderCharacters()}
             </div>
-          )}
+            {!isFinished && typedText.length === 0 && (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="bg-blue-50/50 backdrop-blur-md px-8 py-3 rounded-full border border-blue-100 shadow-sm">
+                  <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-500">Focus to Begin</p>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
+      
+      {/* Subtle decorative elements matching images */}
+      <div className="absolute -top-6 -right-6 h-24 w-24 bg-blue-400/10 blur-3xl rounded-full" />
+      <div className="absolute -bottom-6 -left-6 h-32 w-32 bg-purple-400/10 blur-3xl rounded-full" />
     </div>
   );
 }

@@ -10,13 +10,13 @@ interface RestartButtonProps {
 export default function RestartButton({ onRestart }: RestartButtonProps) {
   return (
     <Button
-      variant="skeuo"
       onClick={onRestart}
-      className="group px-8 h-12"
+      className="glass-pill h-16 group relative overflow-hidden"
     >
-      <RefreshCw className="mr-2 h-4 w-4 transition-transform group-hover:rotate-180" />
-      <span className="pixel-text text-xs">Reset System</span>
-      <span className="ml-3 text-[10px] text-zinc-600 opacity-0 group-hover:opacity-100 transition-opacity">TAB</span>
+      <div className="absolute inset-0 bg-gradient-to-r from-blue-400/0 via-white/40 to-blue-400/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+      <RefreshCw className="mr-3 h-5 w-5 text-blue-500 transition-transform group-hover:rotate-180" />
+      <span className="text-sm font-black uppercase tracking-[0.2em] text-slate-700">Refresh Session</span>
+      <span className="ml-4 text-[10px] font-bold text-slate-300">TAB</span>
     </Button>
   );
 }
